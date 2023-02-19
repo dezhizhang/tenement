@@ -10,7 +10,12 @@ func main() {
 
 	r.Static("/tenement", "view")
 
-	r.GET("/api/v1.0/session", controller.GetSession)
+	v1 := r.Group("/api/v1.0")
+
+	{
+		v1.GET("/session", controller.GetSession)
+		v1.GET("/image-code/:uuid", controller.GetImageCode)
+	}
 
 	r.Run(":8000")
 }
